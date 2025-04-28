@@ -65,7 +65,8 @@ static const char unknown_str[] = "N/A";
  */
 static const struct arg args[] = {
 	/* function		format			argument */
-	{ run_command,  	"VOL %s% |",		"pamixer --get-volume"},
+	{ run_command,  	"VOL %s |",		"if pamixer --get-mute | grep -q true; then echo N/A; else echo $(pamixer --get-volume)%; fi"},
+
 	{ run_command,  	" NET %s |",		"iwgetid -r >/dev/null && echo 'WLAN' || echo 'N/A'"},
 	{ run_command,  	" BRI %s% |",		"brightnessctl -m -d amdgpu_bl1 | awk -F, '{print substr($4, 0, length($4)-1)}'"},
 	{ battery_perc,		" BAT %s% |", 	        "BAT0" },
